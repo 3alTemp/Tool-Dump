@@ -6,7 +6,7 @@ It's a tool made for... you guessed it! Comparing folders!
 ### Usage
 py comparefolders.py {args}
 
-| Argument | Syntax | Usage |
+| Argument | Syntax | Description |
 | :----: | :---: | :--- |
 | (any path) | "path/to/folder" | Adds the given path for comparing (must be a folder path.) |
 | -i (name)  | -i "*.pyc" | Ignores folders and files with the name provided. | 
