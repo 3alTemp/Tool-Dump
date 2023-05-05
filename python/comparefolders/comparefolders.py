@@ -54,7 +54,7 @@ def read_args(argv:list, op_mode:str, silent:bool, f_out:str) -> list[str]:
         if tar == '-i': # Add ignore
             file_ignore.append(arg)
         elif tar == '-o':
-            f_out = arg or ''
+            f_out = arg or None
         elif tar == '-m':
             if str.lower(arg) in v_op_modes: op_mode = arg
             else:
@@ -204,10 +204,11 @@ else:
             for fl in goal:
                 clone_file(f'{fd}{fl}',f'{towrite}{fd}{fl}')
 
-    if f_out != '':
+    if f_out is not None:
         # Writing procedure
+        outdir = os.path.normpath(f'.{towrite}{f_out}')
         if not os.path.exists(towrite): os.mkdir(towrite)
-        with open(f'{towrite}{f_out}', 'w') as x:
+        with open(outdir, 'w') as x:
             for l in goal:
                 x.write(f'{l}\n')
 
@@ -217,15 +218,15 @@ if not silent:
     if op_mode == 'compare':
         print(
             f'Finished. {len(f_list)} files were compared, {dfile_count} files were different.',
-            f'\nPaths saved in "compare.log" @ "{b}/compare.log".' if f_out != '' else ''
+            f'\nPaths saved in "compare.log" @ "{b}/compare.log".' if f_out is not None else ''
             )
     elif op_mode == 'fetch':
         print(
             f'Finished. {len(f_list)} files were compared, {dfile_count} files were different.',
-            f'\nPaths and files saved in "compare_result" folder @ "{b}/compare_result/".' if f_out != '' else ''
+            f'\nPaths and files saved in "compare_result" folder @ "{b}/compare_result/".' if f_out is not None else ''
             )
     else: 
         print(
             f'Finished. {len(f_list)} paths have been saved.',
-            f'\nPaths saved in "compare.log" @ "{b}/compare.log".' if f_out != '' else ''
+            f'\nPaths saved in "compare.log" @ "{b}/compare.log".' if f_out is not None else ''
             )
