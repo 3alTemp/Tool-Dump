@@ -206,7 +206,8 @@ else:
 
     if f_out is not None:
         # Writing procedure
-        outdir = os.path.normpath(f'.{towrite}{f_out}')
+        if towrite == "/": towrite = "./"
+        outdir = os.path.normpath(f'{towrite}{f_out}')
         if not os.path.exists(towrite): os.mkdir(towrite)
         with open(outdir, 'w') as x:
             for l in goal:
