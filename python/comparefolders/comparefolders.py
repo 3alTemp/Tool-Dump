@@ -200,9 +200,9 @@ else:
         dfile_count = compare(folders, f_list)
 
     if op_mode == 'fetch':
-        for fd in folders:
+        for i,fd in enumerate(folders):
             for fl in goal:
-                clone_file(f'{fd}{fl}',f'{towrite}{fd}{fl}')
+                clone_file(f'{fd}{fl}',f'{towrite}{f"{i}/"}{fl}')
 
     if f_out is not None:
         # Writing procedure
